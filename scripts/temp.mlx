@@ -1,0 +1,55 @@
+<!DOCTYPE FilterScript>
+<FilterScript>
+
+  <filter name="Close Holes">
+  <Param tooltip="The size is expressed as number of edges composing the hole boundary" name="MaxHoleSize" value="30" description="Max size to be closed " type="RichInt"/>
+  <Param tooltip="Only the holes with at least one of the boundary faces selected are closed" name="Selected" value="false" description="Close holes with selected faces" type="RichBool"/>
+  <Param tooltip="After closing a hole the faces that have been created are left selected. Any previous selection is lost. Useful for example for smoothing the newly created holes." name="NewFaceSelected" value="true" description="Select the newly created faces" type="RichBool"/>
+  <Param tooltip="When closing an holes it tries to prevent the creation of faces that intersect faces adjacent to the boundary of the hole. It is an heuristic, non intersetcting hole filling can be NP-complete." name="SelfIntersection" value="true" description="Prevent creation of selfIntersecting faces" type="RichBool"/>
+  </filter>
+
+
+  
+  <filter name="Laplacian Smooth">
+  <Param type="RichInt" value="3" name="stepSmoothNum" description="Smoothing steps" tooltip="The number of times that the whole algorithm (normal smoothing + vertex fitting) is iterated."/>
+  <Param type="RichBool" value="true" name="Boundary" description="1D Boundary Smoothing" tooltip="Smooth boundary edges only by themselves (e.g. the polyline forming the boundary of the mesh is independently smoothed). This can reduce the shrinking on the border but can have strange effects on very small boundaries."/>
+  <Param type="RichBool" value="true" name="cotangentWeight" description="Cotangent weighting" tooltip="Use cotangent weighting scheme for the averaging of the position. Otherwise the simpler umbrella scheme (1 if the edge is present) is used."/>
+  <Param type="RichBool" value="false" name="Selected" description="Affect only selection" tooltip="If checked the filter is performed only on the selected area"/>
+  </filter>
+
+  <filter name="Re-Orient all faces coherentely"/>
+  <filter name="Recompute Face Normals"/>
+  <filter name="Recompute Vertex Normals">
+  <Param name="weightMode" description="Weighting Mode:" value="0" enum_val2="By Area" tooltip="" enum_val1="By Angle" enum_val3="As defined by N. Max" type="RichEnum" enum_val0="Simple Average" enum_cardinality="4"/>
+  </filter>
+
+
+    <filter name="Remove Duplicate Faces"/>
+  <filter name="Remove Duplicated Vertex"/>
+  <filter name="Remove Faces from Non Manifold Edges"/>
+  <filter name="Select non Manifold Vertices"/>
+  <filter name="Delete Selected Vertices"/>
+  <filter name="Remove Duplicate Faces"/>
+  <filter name="Remove Duplicated Vertex"/>
+  <filter name="Remove Zero Area Faces"/>
+  <filter name="Remove Unreferenced Vertex"/>
+  
+
+  <filter name="Recompute Face Normals"/>
+  <filter name="Recompute Vertex Normals">
+  <Param name="weightMode" description="Weighting Mode:" value="0" enum_val2="By Area" tooltip="" enum_val1="By Angle" enum_val3="As defined by N. Max" type="RichEnum" enum_val0="Simple Average" enum_cardinality="4"/>
+  </filter>
+  <filter name="Re-Orient all faces coherentely"/>
+  <filter name="Normalize Vertex Normals"/>
+  <filter name="Normalize Face Normals"/>
+
+
+ <filter name="Colorize curvature (APSS)">
+  <Param name="SelectionOnly" value="false" type="RichBool" tooltip="If checked, only selected vertices will be projected." description="Selection only"/>
+  <Param name="FilterScale" value="2" type="RichFloat" tooltip="Scale of the spatial low pass filter.&#xa;It is relative to the radius (local point spacing) of the vertices." description="MLS - Filter scale"/>
+  <Param name="ProjectionAccuracy" value="0.0001" type="RichFloat" tooltip="Threshold value used to stop the projections.&#xa;This value is scaled by the mean point spacing to get the actual threshold." description="Projection - Accuracy (adv)"/>
+  <Param name="MaxProjectionIters" value="15" type="RichInt" tooltip="Max number of iterations for the projection." description="Projection - Max iterations (adv)"/>
+  <Param name="SphericalParameter" value="1" type="RichFloat" tooltip="Control the curvature of the fitted spheres: 0 is equivalent to a pure plane fit,1 to a pure spherical fit, values between 0 and 1 gives intermediate results,while other real values might give interesting results, but take care with extremesettings !" description="MLS - Spherical parameter"/>
+  <Param enum_cardinality="5" value="0" enum_val0="Mean" enum_val1="Gauss" enum_val2="K1" enum_val3="K2" enum_val4="ApproxMean" name="CurvatureType" type="RichEnum" tooltip="The type of the curvature to plot.&lt;br>ApproxMean uses the radius of the fitted sphere as an approximation of the mean curvature." description="Curvature type"/>
+ </filter>
+</FilterScript>
