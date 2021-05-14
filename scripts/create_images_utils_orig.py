@@ -24,65 +24,6 @@ except:
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
-trans = [
-    [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0,0,0,1]],
-    [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0,0,0,1]],
-    [[-1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0,0,0,1]],
-    [[1, 0, 0, 0], [0, -1, 0, 0], [0, 0, -1, 0], [0,0,0,1]],
-    [[-1, 0, 0, 0], [0, -1, 0, 0], [0, 0, 1, 0], [0,0,0,1]],
-    [[-1, 0, 0, 0], [0, 1, 0, 0], [0, 0, -1, 0], [0,0,0,1]],
-    [[1, 0, 0, 0], [0, -1, 0, 0], [0, 0, -1, 0], [0,0,0,1]],
-    [[-1, 0, 0, 0], [0, -1, 0, 0], [0, 0, -1, 0], [0,0,0,1]],
-
-    [[1, 0, 0, 0], [0, 0, 1, 0], [0, 1, 0, 0], [0,0,0,1]],
-    [[-1, 0, 0, 0], [0, 0, 1, 0], [0, 1, 0, 0], [0,0,0,1]],
-    [[1, 0, 0, 0], [0, 0, -1, 0], [0, 1, 0, 0], [0,0,0,1]],
-    [[1, 0, 0, 0], [0, 0, 1, 0], [0, -1, 0, 0], [0,0,0,1]],
-    [[-1, 0, 0, 0], [0, 0, -1, 0], [0, 1, 0, 0], [0,0,0,1]],
-    [[-1, 0, 0, 0], [0, 0, 1, 0], [0, -1, 0, 0], [0,0,0,1]],
-    [[1, 0, 0, 0], [0, 0, -1, 0], [0, -1, 0, 0], [0,0,0,1]],
-    [[-1, 0, 0, 0], [0, 0, -1, 0], [0, -1, 0, 0], [0,0,0,1]],
-
-    [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 1, 0], [0,0,0,1]],
-    [[0, -1, 0, 0], [1, 0, 0, 0], [0, 0, 1, 0], [0,0,0,1]],
-    [[0, 1, 0, 0], [-1, 0, 0, 0], [0, 0, 1, 0], [0,0,0,1]],
-    [[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, -1, 0], [0,0,0,1]],
-    [[0, -1, 0, 0], [-1, 0, 0, 0], [0, 0, 1, 0], [0,0,0,1]],
-    [[0, -1, 0, 0], [1, 0, 0, 0], [0, 0, -1, 0], [0,0,0,1]],
-    [[0, 1, 0, 0], [-1, 0, 0, 0], [0, 0, -1, 0], [0,0,0,1]],
-    [[0, -1, 0, 0], [-1, 0, 0, 0], [0, 0, -1, 0], [0,0,0,1]],
-
-    [[0, 1, 0, 0], [0, 0, 1, 0], [1, 0, 0, 0], [0,0,0,1]],
-    [[0, -1, 0, 0], [0, 0, 1, 0], [1, 0, 0, 0], [0,0,0,1]],
-    [[0, 1, 0, 0], [0, 0, -1, 0], [1, 0, 0, 0], [0,0,0,1]],
-    [[0, 1, 0, 0], [0, 0, 1, 0], [-1, 0, 0, 0], [0,0,0,1]],
-    [[0, -1, 0, 0], [0, 0, -1, 0], [1, 0, 0, 0], [0,0,0,1]],
-    [[0, -1, 0, 0], [0, 0, 1, 0], [-1, 0, 0, 0], [0,0,0,1]],
-    [[0, 1, 0, 0], [0, 0, -1, 0], [-1, 0, 0, 0], [0,0,0,1]],
-    [[0, -1, 0, 0], [0, 0, -1, 0], [-1, 0, 0, 0], [0,0,0,1]],
-
-    [[0, 0, 1, 0], [1, 0, 0, 0], [0, 1, 0, 0], [0,0,0,1]],
-    [[0, 0, -1, 0], [1, 0, 0, 0], [0, 1, 0, 0], [0,0,0,1]],
-    [[0, 0, 1, 0], [-1, 0, 0, 0], [0, 1, 0, 0], [0,0,0,1]],
-    [[0, 0, 1, 0], [1, 0, 0, 0], [0, -1, 0, 0], [0,0,0,1]],
-    [[0, 0, -1, 0], [-1, 0, 0, 0], [0, 1, 0, 0], [0,0,0,1]],
-    [[0, 0, -1, 0], [1, 0, 0, 0], [0, -1, 0, 0], [0,0,0,1]],
-    [[0, 0, 1, 0], [-1, 0, 0, 0], [0, -1, 0, 0], [0,0,0,1]],
-    [[0, 0, -1, 0], [-1, 0, 0, 0], [0, -1, 0, 0], [0,0,0,1]],
-
-    [[0, 0, 1, 0], [0, 1, 0, 0], [1, 0, 0, 0], [0,0,0,1]],    
-    [[0, 0, -1, 0], [0, 1, 0, 0], [1, 0, 0, 0], [0,0,0,1]],    
-    [[0, 0, 1, 0], [0, -1, 0, 0], [1, 0, 0, 0], [0,0,0,1]],    
-    [[0, 0, 1, 0], [0, 1, 0, 0], [-1, 0, 0, 0], [0,0,0,1]],    
-    [[0, 0, -1, 0], [0, -1, 0, 0], [1, 0, 0, 0], [0,0,0,1]],    
-    [[0, 0, -1, 0], [0, 1, 0, 0], [-1, 0, 0, 0], [0,0,0,1]],    
-    [[0, 0, 1, 0], [0, -1, 0, 0], [-1, 0, 0, 0], [0,0,0,1]],    
-    [[0, 0, -1, 0], [0, -1, 0, 0], [-1, 0, 0, 0], [0,0,0,1]],    
-
-    
-]
-
-
 def start_logging():
     ''' '''
     #   global logger
@@ -208,58 +149,6 @@ def setup_and_render_image(task_name, basepath, view_number, view_dict, execute_
         camera.rotation_euler = Euler(view_dict["camera_rotation_original"])
         camera.rotation_euler.rotate(
             Euler(view_dict["camera_rotation_from_original_to_final"]))
-
-
-        ######################################################
-        if settings.BLENDED_MVS:
-            perm = 10
-            m_t = np.array(trans[perm])[:3,:3]
-            P = np.array(view_dict['extrinsics'])[:3,:]
-
-            scale = 1
-            K, R_world2cv, T_world2cv = KRT_from_P(np.matrix(P))
-
-            sensor_width_in_mm = K[1,1]*K[0,2] / (K[0,0]*K[1,2])
-            resolution_x_in_px = K[0,2]*2  # principal point assumed at the center
-            resolution_y_in_px = K[1,2]*2  # principal point assumed at the center
-
-            s_u = resolution_x_in_px / sensor_width_in_mm
-            f_in_mm = K[0,0] / s_u
-
-            # scene.render.resolution_x = int(resolution_x_in_px / scale)
-            # scene.render.resolution_y = int(resolution_y_in_px / scale)
-            # scene.render.resolution_percentage = scale * 100
-
-            arr = np.array([[1, 0, 0],[0, -1, 0],[0, 0, -1]])
-            # R_bcam2cv = Matrix(m_t)
-            # R_bcam2cv = Matrix((m_t).dot(arr))
-            R_bcam2cv = Matrix(
-                ((1, 0, 0),
-                (0, -1, 0),
-                (0, 0, -1)))
-
-            R_cv2world = R_world2cv.T
-            rotation =  Matrix(R_cv2world.tolist()) * R_bcam2cv
-            location = -R_cv2world * T_world2cv
-
-            location = m_t.dot(location)
-            rotation = Matrix(m_t.dot(rotation))
-
-            camera.location = location
-            # camera.rotation_euler = rotation.to_euler()
-
-            focal_len_x = view_dict['intrinsics'][0][0]
-            camera.data.lens = (focal_len_x / settings.RESOLUTION_X) * settings.SENSOR_WIDTH 
-            camera.data.lens_unit = 'MILLIMETERS'
-            # camera.data.sensor_width  = sensor_width_in_mm
-            camera.matrix_world = Matrix.Translation(location)*rotation.to_4x4()
-
-            # print(camera.data.sensor_width, scene.render.resolution_x, scene.render.resolution_y, camera.data.lens)
-            # print(camera.location, camera.rotation_euler)
-            camera.data.clip_end = 1e7
-            bpy.context.scene.update()
-
-        #####################################################3
 
         if settings.CLEVR:
             camera.matrix_world = Matrix(view_dict['matrix_world'])

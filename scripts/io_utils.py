@@ -630,6 +630,10 @@ def load_saved_points_of_interest(model_dir):
         return load_saved_points_of_interest_carla(model_dir)
     elif settings.HYPERSIM:
         return load_saved_points_of_interest_hypersim(model_dir)
+    elif settings.TANKS_AND_TEMPLES:
+        return load_saved_points_of_interest_tanksandtemples(model_dir)
+    elif settings.BLENDED_MVS:
+        return load_saved_points_of_interest_blendedMVS(model_dir)
 
     if settings.CREATE_PANOS:
         point_files = natsorted(glob.glob(os.path.join(model_dir, "pano", "point_info", "point_*.json")))
@@ -676,7 +680,6 @@ def load_model_and_points(basepath, typ='RAW'):
 def parse_filename(filename):
     fname = os.path.basename(filename).split(".")[0]
     toks = fname.split('_')
-
     if toks[0] == "camera":
         point_uuid = toks[1]
         domain_name = toks[-1]
@@ -778,6 +781,54 @@ def load_saved_points_of_interest_hypersim(model_dir):
                 settings.RESOLUTION_X = d['height']
                 settings.RESOLUTION_Y = d['width']
                 # d['resolution'] = d['height']
+
+                pi.append(d)
+
+        point_infos.append(pi)
+    logger.info("Loaded {0} points of interest.".format(len(point_infos)))
+    return point_infos
+
+#################### TanksandTemples functions
+
+def load_saved_points_of_interest_tanksandtemples(model_dir):
+
+    point_files = natsorted(glob.glob(os.path.join(model_dir, "point_info", "point_*.json")))
+
+    point_infos = []
+    for point_num, files_for_point in groupby(point_files, key=lambda x: parse_filename(x)['point_uuid']):
+        pi = []
+        for view_file in files_for_point:
+            with open(view_file) as f:
+                d = json.load(f)
+                d['point_uuid'], d['view_id'], d['camera_uuid'] = point_num, 0, 0
+                d['camera_rotation_original'] = [0.,0.,0.]
+                d['camera_rotation_from_original_to_final'] = [0., 0., 0.]
+                d['camera_location'] = [0.,0.,0.]
+                d['field_of_view_rads'] = np.pi
+
+                pi.append(d)
+
+        point_infos.append(pi)
+    logger.info("Loaded {0} points of interest.".format(len(point_infos)))
+    return point_infos
+
+#################### BlendedMVS functions
+
+def load_saved_points_of_interest_blendedMVS(model_dir):
+
+    point_files = natsorted(glob.glob(os.path.join(model_dir, "point_info", "point_*.json")))
+
+    point_infos = []
+    for point_num, files_for_point in groupby(point_files, key=lambda x: parse_filename(x)['point_uuid']):
+        pi = []
+        for view_file in files_for_point:
+            with open(view_file) as f:
+                d = json.load(f)
+                d['point_uuid'], d['view_id'], d['camera_uuid'] = point_num, 0, 0
+                d['camera_rotation_original'] = [0.,0.,0.]
+                d['camera_rotation_from_original_to_final'] = [0., 0., 0.]
+                d['camera_location'] = [0.,0.,0.]
+                d['field_of_view_rads'] = np.pi
 
                 pi.append(d)
 

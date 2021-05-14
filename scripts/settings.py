@@ -15,6 +15,9 @@ import sys
 CLEVR = False 
 CARLA = False
 HYPERSIM = False
+TANKS_AND_TEMPLES = False
+BLENDED_MVS = True
+
 POINT=10
 OBJ_DENSITY=15
 
@@ -36,8 +39,8 @@ RGB_MODEL_FILE = "segmented.obj"      # delete ?
 
 # -----Render settings and performance -----
 RESOLUTION = 512
-RESOLUTION_X = 640                      #1024:hypersim
-RESOLUTION_Y = 480                      #768:hypersim
+RESOLUTION_X = 768                      #1024:hypersim
+RESOLUTION_Y = 576                      #768:hypersim
 SENSOR_HEIGHT = 20                      #18:clevr , 20:all
 SENSOR_WIDTH = 20                       #32:clevr , 20:all
 TILE_SIZE = 128

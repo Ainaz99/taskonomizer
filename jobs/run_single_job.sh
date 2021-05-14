@@ -69,6 +69,9 @@ case $task in
   ply)
     bash jobs/obj_to_ply_job.sh $model_path $args
     ;;
+  join)
+    bash jobs/join_meshes_blendedMVS.sh $model_path $args
+    ;;
   *)
     echo "ERROR : TASK NOT DEFINED!"
     exit 125
